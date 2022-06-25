@@ -16,7 +16,7 @@ app.listen(PORT, () => {
 });
 
 // API to get Activities
-app.get("/api", async (req, res) => {
+app.get("/api/stories", async (req, res) => {
   const response = await cohere.generate("xlarge", {
     prompt:
       "This is a list of ideas for things to do while camping:\n\n1. Set up a tent\n2. Make a campfire\n3. Go swimming\n4. Explore the woods",

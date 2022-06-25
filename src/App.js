@@ -2,7 +2,7 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const API_URL = "http://localhost:3001";
+  const API_URL = "https://coherecampingcreator.herokuapp.com";
 
   const [data, setData] = useState(null);
   const [category, setCategory] = useState("activities");
@@ -10,7 +10,7 @@ function App() {
   // When handleSubmit is called, passes prompt to /api and then gets assigns response to data
   const handleSubmit = (categ) => {
     setData(null);
-    fetch(`${API_URL}/api/`)
+    fetch(`${API_URL}/api/${categ}`)
       .then((res) => res.json())
       .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`));
   };
