@@ -16,11 +16,13 @@
 
 .App-container h1 {
   color: #fa9e34;
+  margin: 1rem 0 0.5rem 0;
 }
 
 .App-container h2 {
   color: black;
   text-align: center;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 .App-container p {
@@ -31,7 +33,7 @@
 
 .App-container h3 {
   color: black;
-  font-size: 26px;
+  font-size: 24px;
 }
 
 .App-container button {
@@ -50,7 +52,7 @@
 
 .Generate-container button {
   background: #ff8f0f;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 25px;
 }
 
@@ -60,6 +62,46 @@
 
 .Generate-container button:hover {
   background: #bb701a;
+}
+
+.Result-container button {
+  background: rgb(91, 180, 83);
+  font-size: 18px;
+}
+
+.Result-container button:hover {
+  background: rgb(147, 206, 92);
+}
+
+.Number-container {
+  border: 1px rgb(202, 151, 74) solid;
+  margin: 0 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.Number-container label {
+  color: black;
+  font-size: 18px;
+  margin-right: 1rem;
+}
+
+.Number-container input {
+  width: 12rem;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.Number-container button {
+  width: 6rem;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 6px 6px;
+  border-radius: 10px;
+  font-size: 16px;
+  background: rgb(44, 182, 17);
 }
 
 @keyframes App-logo-spin {
@@ -73,12 +115,68 @@
 
 @media screen and (max-width: 768px) {
   .App-container {
-    min-height: unset;
     height: auto;
   }
 
   .App-container h1 {
+    font-size: 40px;
+    line-height: 35px;
+  }
+
+  .App-container p {
+    font-size: 16px;
+  }
+
+  .App-container h2 {
+    font-size: 28px;
+  }
+
+  .App-container h3 {
+    font-size: 22px;
+  }
+
+  .App-container button {
+    padding: 8px 12px;
+    font-size: 18px;
+  }
+
+  .Result-container button {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .App-container h1 {
+    font-size: 32px;
+    line-height: 35px;
+  }
+
+  .App-container h3 {
     font-size: 20px;
+    margin: 1rem;
+  }
+
+  .App-container button {
+    padding: 6px 10px;
+    font-size: 16px;
     line-height: 20px;
   }
+
+  .Result-container button {
+    font-size: 14px;
+  }
+
+  .Number-container label {
+    font-size: 16px;
+  }
+
+  .Number-container input {
+    padding: 1px;
+    width: 10rem;
+  }
+
+  .Number-container button {
+    padding: 2px 2px;
+  }
+
 }

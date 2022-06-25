@@ -6,6 +6,8 @@ function App() {
 
   const [data, setData] = useState(null);
   const [category, setCategory] = useState("activities");
+  const [saveToText, setSaveToText] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   // When handleSubmit is called, fetches API call from /api/category and then gets assigns response to data
   const handleSubmit = (categ) => {
@@ -23,6 +25,10 @@ function App() {
       .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`))
       .catch((err) => console.log(err));
   }
+
+  const sendTwilioText = () => {
+    console.log(phoneNumber);
+  };
 
   return (
     <div className="App">
@@ -79,7 +85,37 @@ function App() {
         </div>
         <div>
           <h1>Result:</h1>
-          <h3>{!data ? "Your generation will appear here" : data}</h3>
+          <div>
+            {!data ? (
+              "Your generation will appear here"
+            ) : (
+              <div className="Result-container">
+                <h3>{data}</h3>
+                <div>
+                  <button onClick={() => setSaveToText(true)}>
+                    Save to Text
+                  </button>
+                  {saveToText && 
+                  <button onClick={() => setSaveToText(false)}>
+                    Cancel
+                  </button>
+}
+                </div>
+                {saveToText && (
+                  <div className="Number-container">
+                    <label>Input your Phone Number</label>
+                    <input
+                      value={phoneNumber}
+                      onChange={(e) => {
+                        setPhoneNumber(e.target.value);
+                      }}
+                    />
+                    <button onClick={() => sendTwilioText()}>Submit</button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
