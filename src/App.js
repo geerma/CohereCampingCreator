@@ -7,7 +7,7 @@ function App() {
   const [data, setData] = useState(null);
   const [category, setCategory] = useState("activities");
 
-  // When handleSubmit is called, passes prompt to /api and then gets assigns response to data
+  // When handleSubmit is called, fetches API call from /api/category and then gets assigns response to data
   const handleSubmit = (categ) => {
     setData(null);
     fetch(`${API_URL}/api/${categ}`)
@@ -15,12 +15,13 @@ function App() {
       .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`));
   };
 
-  const handleStories = () => {
+  // Async to fetch long api call for the scary story
+  async function fetchStory() {
     setData(null);
-    fetch(`${API_URL}/api/stories`)
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`));
+    await fetch(`${API_URL}/api/stories`)
+    .then((res) => res.json())
+    .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`))
+    .catch(err => console.log(err))
   }
 
   return (
@@ -49,7 +50,7 @@ function App() {
             </div>
           ) : category === "stories" ? (
             <div>
-              <button onClick={() => handleStories()}>Generate a list of stories</button>
+              <button onClick={() => fetchStory()}>Generate a list of stories</button>
             </div>
           ) : (
             <div></div>
