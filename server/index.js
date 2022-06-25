@@ -82,9 +82,8 @@ app.get("/send-twilio-text", (req, res) => {
   client.messages
     .create({
       body: message,
-      to: "+1",
-      phoneNumber,
-      from: "+15484884158",
+      to: '+1'+phoneNumber,
+      from: '+15484884158',
     })
     .then((message) => console.log(message.body));
 });
