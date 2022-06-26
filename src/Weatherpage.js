@@ -1,5 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
+import heatindexchart from './images/heatindexchart.jpg'
 
 const Weatherpage = () => {
   const [cityName, setCityName] = useState("");
@@ -62,6 +63,14 @@ const Weatherpage = () => {
               )}
             </div>
           )}
+          <div className="heat-index-container">
+            <h2>Heat Index</h2>
+            <p>Heat Index is the perceived or apparent temperature that a human feels when combining the air temperature with relative humidity.</p>
+            <p>For example, if the air temperature is 100F and the relative humdity is 50%, the heat index / perceived temperature is 124F!</p>
+            <p>As the relative humdity increases, the hotter the perceived temeprature is.</p>
+            <p>For camping / travelling, it is important to be aware, since heat strokes can be severely dangerous.</p>
+            <img src={heatindexchart} alt="heat index chart"/>
+          </div>
         </div>
       </div>
     </div>

@@ -137,6 +137,20 @@
   font-size: 16px;
 }
 
+.heat-index-container {
+  max-width: 800px;
+
+}
+
+.heat-index-container p {
+  font-size: 20px;
+}
+
+.heat-index-container img {
+  width: 80%;
+  margin-bottom: 1rem;
+}
+
 /* Media CSS for mobile */
 
 @media screen and (max-width: 768px) {
@@ -243,5 +257,8 @@
     width: 12rem;
     font-size: 14px;
   }
-}
 
+  .heat-index-container img {
+    width: 80%;
+  }
+}
