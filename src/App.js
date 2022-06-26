@@ -63,7 +63,8 @@ function App() {
           <h1>Cohere Campfire Creator</h1>
           <p>
             This website allows the user to generate a story or question for
-            exciting fun at a campfire!
+            exciting fun at a campfire! If you really like what is generated,
+            you can send it to your phone via a Twilio text message!
           </p>
         </div>
         <div>
@@ -80,7 +81,7 @@ function App() {
             <div>
               <h2>Activities</h2>
               <p>
-                Click on the button to generate some activties to do during
+                Click on the button to generate some activities to do during
                 camping.
               </p>
               <button onClick={() => handleSubmit("activities")}>
@@ -110,8 +111,9 @@ function App() {
             <div>
               <h2>Truth</h2>
               <p>
-                Click on the button to generate 3-4 questions for the
-                Truth Game! A little more personal than "Questions" (but still school-friendly!). Select one to ask!
+                Click on the button to generate 3-4 questions for the Truth
+                Game! A little more personal than "Questions" (but still
+                school-friendly!). Select one to ask!
               </p>
               <button onClick={() => handleSubmit("truth")}>
                 Generate truth questions
