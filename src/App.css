@@ -111,14 +111,33 @@
   background: rgb(44, 182, 17);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Weather Page*/
+.weather-form-container {
+  display: flex;
+  flex-direction: column;
 }
+
+.weather-form-container label {
+  color: black;
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+}
+
+.weather-form-container input {
+  margin: auto;
+  width: 18rem;
+  padding: 0.5rem;
+}
+
+.weather-form-container button {
+  width: 18rem;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: 16px;
+}
+
+/* Media CSS for mobile */
 
 @media screen and (max-width: 768px) {
   .App-container {
@@ -153,6 +172,19 @@
 
   .Result-container button {
     font-size: 16px;
+  }
+
+  .weather-form-container label {
+    font-size: 16px;
+  }
+
+  .weather-form-container input {
+    width: 14rem;
+  }
+
+  .weather-form-container button {
+    width: 14rem;
+    font-size: 14px;
   }
 }
 
@@ -199,4 +231,17 @@
     padding: 2px 2px;
   }
 
+  .weather-form-container label {
+    font-size: 16px;
+  }
+
+  .weather-form-container input {
+    width: 10rem;
+  }
+
+  .weather-form-container button {
+    width: 12rem;
+    font-size: 14px;
+  }
 }
+
