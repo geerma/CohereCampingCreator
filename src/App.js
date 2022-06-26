@@ -8,11 +8,18 @@ function App() {
   const [category, setCategory] = useState("activities");
   const [saveToText, setSaveToText] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [message, setMessage] = useState("hello");
+  const [message, setMessage] = useState("default message");
+
+  // Handles changing of categories between activities, questions, and stories.
+  const handleCategory = (whichCategory) => {
+    setCategory(whichCategory);
+    setSaveToText(false); //Sets saveToText to false, if it was true, so that setMessage can be called again. Otherwise, twilio will send previous generation.
+  }
 
   // When handleSubmit is called, fetches API call from /api/category and then gets assigns response to data
   const handleSubmit = (categ) => {
     setData(null);
+    setSaveToText(false);
     fetch(`${API_URL}/api/${categ}`)
       .then((res) => res.json())
       .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`));
@@ -21,17 +28,32 @@ function App() {
   // Async to fetch long api call for the scary story
   async function fetchStory() {
     setData(null);
+    setSaveToText(false);
     await fetch(`${API_URL}/api/stories`)
       .then((res) => res.json())
       .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`))
       .catch((err) => console.log(err));
   }
 
+  const handleSaveToText = () => {
+    setSaveToText(true);
+    let sliced_message = data.slice(0,320); // Twilio recommends less than 320 characters
+    console.log(sliced_message)
+    setMessage(sliced_message) // Twilio recommends less than 320 characters, sets message to the sliced_message
+  }
+
+  //Sends Twilio Text Message
   const sendTwilioText = () => {
-    console.log(phoneNumber);
-    fetch(
-      `${API_URL}/send-twilio-text?phoneNumber=${phoneNumber}&message=${message}`
-    ).catch((err) => console.log(err));
+    // Check phone number length. If acceptable, send text message. Otherwise, alert the user.
+    if (phoneNumber.length === 10) {
+      console.log(phoneNumber, message);
+      fetch(
+        `${API_URL}/send-twilio-text?phoneNumber=${phoneNumber}&message=${message}`
+      ).catch((err) => console.log(err));
+      setSaveToText(false);
+    } else {
+      alert("Phone number must be 10 digits without dashes or spaces");
+    }
   };
 
   return (
@@ -46,9 +68,9 @@ function App() {
         </div>
         <div>
           <p>Choose what you want to generate!</p>
-          <button onClick={() => setCategory("activities")}>Activities</button>
-          <button onClick={() => setCategory("questions")}>Questions</button>
-          <button onClick={() => setCategory("stories")}>Stories</button>
+          <button onClick={() => handleCategory("activities")}>Activities</button>
+          <button onClick={() => handleCategory("questions")}>Questions</button>
+          <button onClick={() => handleCategory("stories")}>Stories</button>
         </div>
         <div className="Generate-container">
           {category === "activities" ? (
@@ -91,12 +113,12 @@ function App() {
           <h1>Result:</h1>
           <div className="Result-container">
             {!data ? (
-              <h3>Your generation will appear here</h3>
+              <h3>Your generation will appear here. Please wait patiently.</h3>
             ) : (
               <div>
                 <h3>{data}</h3>
                 <div>
-                  <button onClick={() => setSaveToText(true)}>
+                  <button onClick={handleSaveToText}>
                     Save to Text
                   </button>
                   {saveToText && (
@@ -105,9 +127,10 @@ function App() {
                 </div>
                 {saveToText && (
                   <div className="Number-container">
-                    <label>Input your Phone Number</label>
+                    <label>Input your Phone Number (format: 3101234567) </label>
                     <input
                       value={phoneNumber}
+                      placeholder="Phone Number"
                       onChange={(e) => {
                         setPhoneNumber(e.target.value);
                       }}
