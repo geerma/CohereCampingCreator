@@ -29,6 +29,9 @@
   color: black;
   text-align: center;
   font-size: 22px;
+  max-width: 800px;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .App-container h3 {
@@ -157,6 +160,8 @@
   .App-container h1 {
     font-size: 32px;
     line-height: 35px;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 
   .App-container h3 {

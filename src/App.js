@@ -14,7 +14,7 @@ function App() {
   const handleCategory = (whichCategory) => {
     setCategory(whichCategory);
     setSaveToText(false); //Sets saveToText to false, if it was true, so that setMessage can be called again. Otherwise, twilio will send previous generation.
-  }
+  };
 
   // When handleSubmit is called, fetches API call from /api/category and then gets assigns response to data
   const handleSubmit = (categ) => {
@@ -37,16 +37,16 @@ function App() {
 
   const handleSaveToText = () => {
     setSaveToText(true);
-    let sliced_message = data.slice(0,320); // Twilio recommends less than 320 characters
-    console.log(sliced_message)
-    setMessage(sliced_message) // Twilio recommends less than 320 characters, sets message to the sliced_message
-  }
+    let sliced_message = data.slice(0, 320); // Twilio recommends less than 320 characters
+    console.log(sliced_message);
+    setMessage(sliced_message); // Twilio recommends less than 320 characters, sets message to the sliced_message
+  };
 
   //Sends Twilio Text Message
   const sendTwilioText = () => {
     // Check phone number length. If acceptable, send text message. Otherwise, alert the user.
     if (phoneNumber.length === 10) {
-      console.log(phoneNumber, message);
+      console.log(message);
       fetch(
         `${API_URL}/send-twilio-text?phoneNumber=${phoneNumber}&message=${message}`
       ).catch((err) => console.log(err));
@@ -68,9 +68,12 @@ function App() {
         </div>
         <div>
           <p>Choose what you want to generate!</p>
-          <button onClick={() => handleCategory("activities")}>Activities</button>
+          <button onClick={() => handleCategory("activities")}>
+            Activities
+          </button>
           <button onClick={() => handleCategory("questions")}>Questions</button>
           <button onClick={() => handleCategory("stories")}>Stories</button>
+          <button onClick={() => handleCategory("truth")}>Truth</button>
         </div>
         <div className="Generate-container">
           {category === "activities" ? (
@@ -91,7 +94,7 @@ function App() {
                 Click on the button to generate an exciting question to ask!
               </p>
               <button onClick={() => handleSubmit("questions")}>
-                Generate a list of questions
+                Generate a question
               </button>
             </div>
           ) : category === "stories" ? (
@@ -101,8 +104,17 @@ function App() {
                 Click on the button to generate the title of a scary story! It
                 will also generate some snippets of the story as a reference.
               </p>
-              <button onClick={() => fetchStory()}>
-                Generate a list of stories
+              <button onClick={() => fetchStory()}>Generate a story</button>
+            </div>
+          ) : category === "truth" ? (
+            <div>
+              <h2>Truth</h2>
+              <p>
+                Click on the button to generate 3-4 questions for the
+                Truth Game! A little more personal than "Questions" (but still school-friendly!). Select one to ask!
+              </p>
+              <button onClick={() => handleSubmit("truth")}>
+                Generate truth questions
               </button>
             </div>
           ) : (
@@ -118,9 +130,7 @@ function App() {
               <div>
                 <h3>{data}</h3>
                 <div>
-                  <button onClick={handleSaveToText}>
-                    Save to Text
-                  </button>
+                  <button onClick={handleSaveToText}>Save to Text</button>
                   {saveToText && (
                     <button onClick={() => setSaveToText(false)}>Cancel</button>
                   )}
