@@ -1,14 +1,15 @@
 import "./App.css";
 import React, { useState } from "react";
+import Navbar from "./Navbar";
 
 function Homepage() {
-  const API_URL = "https://coherecampingcreator.herokuapp.com";
+  const API_URL = "https://coherecampingcreator.herokuapp.com"; // Backend uploaded to Heroku
 
-  const [data, setData] = useState(null);
-  const [category, setCategory] = useState("activities");
-  const [saveToText, setSaveToText] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [message, setMessage] = useState("default message");
+  const [data, setData] = useState(null); // Data fetched from API
+  const [category, setCategory] = useState("activities"); // Different categories to choose which to generate
+  const [saveToText, setSaveToText] = useState(false); // Toggle phone number container
+  const [phoneNumber, setPhoneNumber] = useState(""); // Phone number
+  const [message, setMessage] = useState("default message"); // Message to send via Twilio
 
   // Handles changing of categories between activities, questions, and stories.
   const handleCategory = (whichCategory) => {
@@ -22,7 +23,7 @@ function Homepage() {
     setSaveToText(false);
     fetch(`${API_URL}/api/${categ}`)
       .then((res) => res.json())
-      .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`));
+      .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`)); // Sets variable data to fetched JSON data
   };
 
   // Async to fetch long api call for the scary story
@@ -31,10 +32,11 @@ function Homepage() {
     setSaveToText(false);
     await fetch(`${API_URL}/api/stories`)
       .then((res) => res.json())
-      .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`))
+      .then((data) => setData(`${data.generations[0].text.slice(0, -1)}`)) // Sets variable data to fetched JSON data
       .catch((err) => console.log(err));
   }
 
+  // When button "save to text" is clicked. Opens up the container, and also sets the variable 'message' to 320 characters of the generated text
   const handleSaveToText = () => {
     setSaveToText(true);
     let sliced_message = data.slice(0, 320); // Twilio recommends less than 320 characters
@@ -42,7 +44,7 @@ function Homepage() {
     setMessage(sliced_message); // Twilio recommends less than 320 characters, sets message to the sliced_message
   };
 
-  //Sends Twilio Text Message
+  // Sends Twilio Text Message
   const sendTwilioText = () => {
     // Check phone number length. If acceptable, send text message. Otherwise, alert the user.
     if (phoneNumber.length === 10) {
@@ -58,20 +60,19 @@ function Homepage() {
 
   return (
     <div className="App">
+      <Navbar />
       <div className="App-container">
         <div>
-          <h1>Cohere Campfire Creator</h1>
+          <h1>Cohere Camping Creator</h1>
           <p>
             This website allows the user to generate a story or question for
-            exciting fun at a campfire! If you really like what is generated,
-            you can send it to your phone via a Twilio text message!
+            exciting fun at a campfire! You can also send it to your phone via a
+            Twilio text message!
           </p>
         </div>
         <div>
           <p>Choose what you want to generate!</p>
-          <button onClick={() => handleCategory("activities")}>
-            Activities
-          </button>
+          <button onClick={() => handleCategory("activities")}>Activities</button>
           <button onClick={() => handleCategory("questions")}>Questions</button>
           <button onClick={() => handleCategory("stories")}>Stories</button>
           <button onClick={() => handleCategory("truth")}>Truth</button>
@@ -92,7 +93,8 @@ function Homepage() {
             <div>
               <h2>Questions</h2>
               <p>
-                Click on the button to generate an exciting question to ask! Leads to deep conversations around the campfire!
+                Click on the button to generate an exciting question to ask!
+                Leads to deep conversations around the campfire!
               </p>
               <button onClick={() => handleSubmit("questions")}>
                 Generate a question
@@ -103,7 +105,8 @@ function Homepage() {
               <h2>Stories</h2>
               <p>
                 Click on the button to generate the title of a scary story! It
-                will also generate some snippets of the story as a reference, and someone can improvise the rest!
+                will also generate some snippets of the story as a reference,
+                and someone can improvise the rest!
               </p>
               <button onClick={() => fetchStory()}>Generate a story</button>
             </div>
@@ -112,7 +115,8 @@ function Homepage() {
               <h2>Truth</h2>
               <p>
                 Click on the button to generate 3-4 questions for the Truth
-                Game! A little bit more 'random' than the Questions category. Select one to ask!
+                Game! A little bit more 'random' than the Questions category.
+                Select one to ask!
               </p>
               <button onClick={() => handleSubmit("truth")}>
                 Generate truth questions
@@ -147,12 +151,19 @@ function Homepage() {
                       }}
                     />
                     <button onClick={() => sendTwilioText()}>Submit</button>
+                    <h6>
+                      Note that the Twilio Trial Number only sends to verified
+                      numbers. Please contact me if you wish to try this out.
+                    </h6>
                   </div>
                 )}
               </div>
             )}
           </div>
         </div>
+        <h6>
+          Disclaimer: This project is not affiliated with the company Cohere
+        </h6>
       </div>
     </div>
   );
