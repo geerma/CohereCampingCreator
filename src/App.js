@@ -92,7 +92,7 @@ function App() {
             <div>
               <h2>Questions</h2>
               <p>
-                Click on the button to generate an exciting question to ask!
+                Click on the button to generate an exciting question to ask! Leads to deep conversations around the campfire!
               </p>
               <button onClick={() => handleSubmit("questions")}>
                 Generate a question
@@ -103,7 +103,7 @@ function App() {
               <h2>Stories</h2>
               <p>
                 Click on the button to generate the title of a scary story! It
-                will also generate some snippets of the story as a reference.
+                will also generate some snippets of the story as a reference, and someone can improvise the rest!
               </p>
               <button onClick={() => fetchStory()}>Generate a story</button>
             </div>
@@ -112,8 +112,7 @@ function App() {
               <h2>Truth</h2>
               <p>
                 Click on the button to generate 3-4 questions for the Truth
-                Game! A little more personal than "Questions" (but still
-                school-friendly!). Select one to ask!
+                Game! A little bit more 'random' than the Questions category. Select one to ask!
               </p>
               <button onClick={() => handleSubmit("truth")}>
                 Generate truth questions
