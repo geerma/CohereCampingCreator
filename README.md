@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Cohere Camping Creator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Cohere Camping Creator! 🏕️
 
-## Available Scripts
+## How to Run
 
-In the project directory, you can run:
+Visit the deployed website [here](https://coherecampingcreator.vercel.app/).
 
-### `npm start`
+If you want to run it on your local machine, then install all dependencies using npm install. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Then, you will need to receive API keys for all environment variables (Cohere API, Twilio API, and OpenWeatherMap API). Start the server using npm run-script run (or 'cd server' and type 'node index.js').
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Inspiration
 
-### `npm test`
+With themes related to **summer, nature, outdoor adventures, and the environment** in general, camping is something many people do during the hot months to unwind. Although they are typically exciting road trips, sometimes there are moments when you aren't sure what to do and need some inspiration. Maybe everyone sitting around the campfire has gone quiet and you're looking to spark up a conversation. Look no further than Cohere Camping Creator.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## What it does
 
-### `npm run build`
+As the name implies, Cohere Camping Creator focuses on using natural language processing (NLP) from Cohere to "create"/generate text, which is created from a model based on example input prompts given to it.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Generator Features:
+- If the user is out camping and wants a list of things to do, this project can generate a list of activities to do during camping. 
+- Will generate a question that you can ask at a campfire or during the road trip journey. Perfect for sparking up deep conversations!
+- Creates the title of a spooky, scary story to tell during the campfire. Will also create some snippets of the story, but leaves it up to you to improvise the rest.
+- Generates 3-4 truth questions for Truth or Dare. A bit wacky and random, but could lead to some flustered individuals or funny moments!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In addition, this project also allows the user to save those generated texts and send them to a phone number via Twilio! 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Since knowing the weather is important for camping, this project also features the usage of a weather API. One thing not commonly discussed during the summer is Heat Index, which is the perceived/apparent temperature that a human feels and is based on temperature as well as relative humidity. This information is included on the weather page.
 
-### `npm run eject`
+## How we built it
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+As an alternative to Figma design, I created a prototype website using Typedream. This process was very quick and easy, and I found it very helpful to visualize how the website was going to look before actually making it. I could also import some styles from the website to my actual CSS styling. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Then, I played around with the Cohere AI Playground, which allows the user to test out how the API would generate text. I created sample input prompts and presets for each category that I needed (eg. questions, scary stories, etc.)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The front-end was created using React (plus HTML, CSS, and JavaScript). I used node.js and Express for the back-end, which was used for the NLP Cohere and Twilio APIs. I also utilized the OpenWeatherMap API. Finally, the front-end was deployed on Vercel and the back-end on Heroku.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Challenges we ran into
 
-## Learn More
+During the creation of my project, I came across many major errors that halted my progress.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The biggest one was the process.env variables being undefined and/or did not call the API correctly. Even after installing dotenv, adding the appropriate lines of code (ex. require('dotenv').config), and adding REACT_APP_ in front of the variable, it would not work. I even combined the frontend and backend into the same folder.
+Thinking it was just a local machine problem, I tried to deploy to Vercel to no avail. However, when I deployed Heroku, I was only able to access the back-end, but I could receive API calls. Then, I changed the API_URL from localhost to the Heroku URL in my front-end, which fixed the problem. This took a couple of hours to troubleshoot, but I learned a lot about frontend and backend deployment.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+It was also challenging doing a solo-hack, since I am required to complete all tasks by myself. However, it was a great learning experience.
 
-### Code Splitting
+## Accomplishments that we're proud of
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+I am proud of the fact that I was able to test out new technologies that I have never used before, and implement them into a project. 
 
-### Analyzing the Bundle Size
+I am also proud of the fact that I took this solo-hack challenge on, which caused me to learn more about frontend, backend, design, and presentation.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## What we learned
 
-### Making a Progressive Web App
+I learned about NLP Cohere, Twilio, OpenWeatherMap API, and Typedream. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+In particular, I spent a good amount of time learning about natural language processing (NLP) since it was a new topic. I learned that Cohere is capable of tasks such as classification, summarization, entity extraction, and embedding (grouping). I also learned about variables/concepts such as Temperature (degrees of randomness/creativity), Likelihood (next word) and Tokens (amount of characters). 
 
-### Advanced Configuration
+I also watched a lecture from Cohere titled 'Generating and Understanding Natural Language with AI', which helped me learn more about NLP.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Since this project is designed to be used on mobile, and it was not created as a mobile app, I paid extra attention to responsive web design. The web app should be acceptable on all mobile screens. I learned a lot about media queries during the project.
 
-### Deployment
+## What's next for Cohere Camping Creator
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I hope to create a mobile version of Cohere Camping Creator, and also improve the UI/UX design aesthetics of this project. Adding more features that warn and educate users on summer ailments (ex. dehydration, sunscreen reapplication for UV rays) is also another area I want to investigate. I would also like to add weather alerts, and have Twilio send a text message if there is a weather warning. 
