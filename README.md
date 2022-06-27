@@ -2,13 +2,15 @@
 
 Welcome to Cohere Camping Creator! 🏕️
 
-## How to Run
+This project was cross-submitted to FreyHacks and SimpliHacks 2.0, and was awarded 'Best Use of NLP Cohere' from both hackathons.
 
-Visit the deployed website [here](https://coherecampingcreator.vercel.app/).
+# Links
 
-If you want to run it on your local machine, then install all dependencies using npm install. 
+[Presentation and Demo Video](https://www.youtube.com/watch?v=hYpDEOrb1ss)
 
-Then, you will need to receive API keys for all environment variables (Cohere API, Twilio API, and OpenWeatherMap API). Start the server using npm run-script run (or 'cd server' and type 'node index.js').
+[Website Link](https://coherecampingcreator.vercel.app/)
+
+[Devpost](https://devpost.com/software/cohere-camping-creator)
 
 ## Inspiration
 
@@ -64,3 +66,11 @@ Since this project is designed to be used on mobile, and it was not created as a
 ## What's next for Cohere Camping Creator
 
 I hope to create a mobile version of Cohere Camping Creator, and also improve the UI/UX design aesthetics of this project. Adding more features that warn and educate users on summer ailments (ex. dehydration, sunscreen reapplication for UV rays) is also another area I want to investigate. I would also like to add weather alerts, and have Twilio send a text message if there is a weather warning. 
+
+## How to Run
+
+Visit the deployed website [here](https://coherecampingcreator.vercel.app/).
+
+If you want to run it on your local machine, type 'npm install' and install all dependencies such as react-router, twilio, express, etc.
+
+Then, you will need to receive API keys for all environment variables (Cohere API, Twilio API, and OpenWeatherMap API). Run the front-end using 'npm start'. Then,start the server using 'pm run-script run'(or 'cd server' and type 'node index.js').
