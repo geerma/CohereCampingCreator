@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 
 function Homepage() {
-  const API_URL = "https://coherecampingcreator.herokuapp.com"; // Backend uploaded to Heroku
+  const API_URL = "https://coherecampingcreator-production.up.railway.app"; // Backend uploaded to Heroku
 
   const [data, setData] = useState(null); // Data fetched from API
   const [category, setCategory] = useState("activities"); // Different categories to choose which to generate
@@ -130,7 +130,7 @@ function Homepage() {
           <h1>Result:</h1>
           <div className="Result-container">
             {!data ? (
-              <h3>Your generation will appear here. Please wait patiently.</h3>
+              <p>Your generation will appear here after clicking on the button. Please wait patiently. May take 10-20 seconds!</p>
             ) : (
               <div>
                 <h3>{data}</h3>
@@ -151,10 +151,6 @@ function Homepage() {
                       }}
                     />
                     <button onClick={() => sendTwilioText()}>Submit</button>
-                    <h6>
-                      Note that the Twilio Trial Number only sends to verified
-                      numbers. Please contact me if you wish to try this out.
-                    </h6>
                   </div>
                 )}
               </div>
