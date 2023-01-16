@@ -1,17 +1,18 @@
+require("dotenv").config(); //dot env
 const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const PORT = process.env.PORT || 3001;
 const app = express();
-require("dotenv").config(); //dot env
 
 //Cohere requirements
+console.log(process.env.COHERE_API_KEY)
 const cohere = require("cohere-ai");
-cohere.init(`${process.env.REACT_APP_COHERE_API_KEY}`);
+cohere.init(`${process.env.COHERE_API_KEY}`);
 
 //Twilio requirements
-const accountSid = process.env.REACT_APP_TWILIO_ACCOUNT_SID;
-const authToken = process.env.REACT_APP_TWILIO_AUTH_TOKEN;
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken);
 
 app.use(cors());
@@ -22,7 +23,7 @@ app.listen(PORT, () => {
 
 // API to get Activities
 app.get("/api/activities", async (req, res) => {
-  const response = await cohere.generate("large", {
+  const response = await cohere.generate("xlarge", {
     prompt:
       "This is a list of ideas for things to do while camping:\n\n1. Set up a tent\n2. Make a campfire\n3. Go swimming\n4. Explore the woods",
     max_tokens: 120,
@@ -40,7 +41,7 @@ app.get("/api/activities", async (req, res) => {
 
 // API to get Questions
 app.get("/api/questions", async (req, res) => {
-  const response = await cohere.generate("large", {
+  const response = await cohere.generate("xlarge", {
     //Prompt example questions from 'The 36 Questions That Lead to Love' and 'Campfire Games, Questions' from Gander RV
     prompt:
       "This program will generate exciting questions to ask during a campfire.\n\nGiven the choice of anyone in the world, whom would you want as a dinner guest?\n--\nWhat is your favorite song right now, and why? (Or, what should be the theme song to your life right now?)\n--\nWhat was the best thing about today, and why?\n--\nWhat is one thing you learned about yourself recently?\n--\nWhat is a television show (current or past) that you would be willing to live in? Why?\n--\nWho is someone you look up to and would like to emulate? Why\n--\nWhen did you last sing to yourself? To someone else?\n--\nDo you think your social media profiles reflect you accurately?\n--\nWould you like to be famous? In what way?\n--\nDescribe your perfect outdoor adventure.\n--\nWhat is one adventure activity that you would be scared, but willing to try?\n--\nWhat injustices in the world make you angry?\n--\nWhat is your happiest memory?\n--\nWhat are three things on your “bucket-list” or “to do” list before you die?\n--\nShare about a time when you felt the most alive or the most fully yourself.\n--\nIf you could design your dream job, what would it be?\n--\nWho are some people you think are having a positive influence on culture or in our world? Why?\n--\nHow do you go about making a decision? Does it change depending on the weight of the decision?\n--\nWhat is one item you could not live without, and why?\n--\nWhat is the best meal you can cook? If you could have anyone (dead or alive) over for dinner, who would you invite?\n--\nIf you could time-travel to any era in history or the future, what period would you choose and why?\n--\nIf you could learn any skill, what would you choose and why?\n--\nWhat is one life lesson you would like to teach your children?\n--\nWhat is the best advice you ever got?\n--\nFor what in your life do you feel most grateful?\n--\nIf you could wake up tomorrow having gained any one quality or ability, what would it be?\n--\nWhat is the greatest accomplishment of your life?\n--\nWhat is your most treasured memory?\n--\nIs there something that you’ve dreamed of doing for a long time? Why haven’t you done it?\n--",
@@ -76,7 +77,7 @@ app.get("/api/stories", async (req, res) => {
 });
 
 app.get("/api/truth", async (req, res) => {
-  const response = await cohere.generate("large", {
+  const response = await cohere.generate("xlarge", {
     // Truth example prompts from '130+ best truth questions' - Cosmopolitan and 'Truth Game Question List' - ksmb.tistory
     prompt:
       "This program will generate a Truth for the Truth or Dare game.\n\nTruth: What's the worst thing you've ever done at work?\nTruth: When was the last time you cried?\nTruth: What's your biggest fear?\n--\nTruth: What situation are you most afraid of and what trauma do you have?\nTruth: Who's the last person you searched on Instagram?\nTruth: What's something you're glad your family doesn't know about you?\n--\nTruth: Who did you last text?\nTruth: Have you ever been jealous of a friend? For what?\nTruth: What's the worst thing you've ever done?\n--\nTruth: What's the strangest thing you've ever eaten?\nTruth: What's your relationship dealbreaker?\nTruth: What's a secret you've never told anyone?\n--\nTruth: Do you have a hidden talent?\nTruth: Who was your first celebrity crush?\nTruth: What did you last search on Google?\n--\nTruth: What did you want to be while growing up?\nTruth: Do you think you are the attractive person in the room?\nTruth: Have you ever cheated in an exam?\n--\nTruth: What's the most embarrassing thing you've ever done?\nTruth: What's your biggest insecurity?\nTruth: Have you ever stayed friends even though you actually hated them?\n--\nTruth: What's the biggest mistake you've ever made?\nTruth: What's the most disgusting thing you've ever done?\nTruth: Who would you like to kiss in this room?\n--\nTruth: What's one thing you hate people knowing about you?\nTruth: What's the worst thing anyone's ever done to you?\nTruth: What's the best thing anyone's ever done for you?\n--\nTruth: What's the worst thing you've ever said to anyone?\nTruth: Have you ever peed in the shower?\nTruth: What's the strangest dream you've had?\n--\nTruth: Have you ever been caught doing something you shouldn't have?\nTruth: What's the worst date you've been on?\nTruth: What's the best date you've been on?\n--\nTruth: What happened on the latest night out you've ever had?\nTruth: What's your biggest regret?\nTruth: What's the biggest misconception about you?\n--\nTruth: Have you ever said something you regret about someone in this room?\nTruth: What's one thing you wish people knew about you?\nTruth: What is your weirdest habit?\n--\nTruth: Why did your last relationship break down?\nTruth: Have you ever lied to get out of a bad date?\nTruth: What's the most trouble you've been in?\n--\nTruth: What's the worst thing you've ever done to someone else?\nTruth: What's the worst thing you've lied about?\nTruth: What's one thing you wish you'd lied about?\n--\nTruth: What's the best piece of advice you've been given?\nTruth: What's the most you've spent on a night out?\nTruth: Have you ever returned or re-gifted a present?\n--\nTruth: What have you purchased that's been the biggest waste of money?\nTruth: What's your guilty pleasure?\nTruth: What's one thing you only do when you're alone?\n--\nTruth: If you had to get back with an ex, who would you choose?\nTruth: If you had to cut one friend out of your life, who would it be?\nTruth: Do you have a favourite friend?\n--\nTruth: Do you have a favourite sibling?\nTruth: What's the strangest rumour you've heard about yourself?\nTruth: What's your favourite gross food combination?\n--\nTruth: If you could swap lives with someone in this room, who would it be?\nTruth: Tell me about your first kiss\nTruth: What was the most inappropriate time you farted?\n--\nTruth: What's something you really hope your family never finds out about?\nTruth: What's the weirdest lie you've ever told?\nTruth: Do you have any fake social media accounts\n--",
